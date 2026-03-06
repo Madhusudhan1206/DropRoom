@@ -1,0 +1,16 @@
+{
+  "name": "fileshare",
+  "version": "1.0.0",
+  "description": "Room-based file sharing app",
+  "main": "server/server.js",
+  "scripts": {
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build",
+    "start": "node server/server.js",
+    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "postinstall": "cd client && npm install && cd ../server && npm install"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
