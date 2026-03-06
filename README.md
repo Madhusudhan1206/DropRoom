@@ -2,6 +2,9 @@
 
 A full-stack file sharing app. Create a room, share the 6-digit code, drop files. Auto-expires in 10 minutes. No accounts, no permanent storage.
 
+# Deployed on Render 
+        — https://droproom-iqb4.onrender.com
+
 ## Tech Stack
 
 | Layer     | Tech                          |
