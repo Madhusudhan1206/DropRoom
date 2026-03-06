@@ -1,4 +1,3 @@
 node_modules/
 server/uploads/
 .env
-dist/

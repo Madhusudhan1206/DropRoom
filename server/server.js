@@ -38,13 +38,15 @@ app.get("/health", (req, res) => res.json({ status: "ok", timestamp: Date.now() 
 
 // Serve static client files
 const clientBuildPath = path.join(__dirname, "../client/dist");
-if (fs.existsSync(clientBuildPath)) {
-  app.use(express.static(clientBuildPath));
-  // SPA fallback: serve index.html for all non-API routes
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(clientBuildPath, "index.html"));
-  });
-}
+console.log("Client build path:", clientBuildPath);
+console.log("Client build path exists:", fs.existsSync(clientBuildPath));
+
+app.use(express.static(clientBuildPath));
+// SPA fallback: serve index.html for all non-API routes
+app.get("*", (req, res) => {
+  console.log("Serving index.html for route:", req.path);
+  res.sendFile(path.join(clientBuildPath, "index.html"));
+});
 
 io.on("connection", (socket) => {
   console.log(`Socket connected: ${socket.id}`);
