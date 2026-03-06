@@ -71,7 +71,15 @@ Once deployed, you'll get a URL like: `https://your-app-name.onrender.com`
 
 ### Issue: "Cannot GET /"
 - Check that `npm run build` completed successfully
-- Verify `client/dist` folder exists
+- Verify `client/dist` folder exists (not in root directory)
+- Ensure the server is configured to serve static files from `../client/dist`
+- Make sure the SPA fallback route (`app.get("*", ...)`) is placed **after** all API routes
+- Check Render build logs for any build failures
+
+### Issue: Build output in wrong location
+- Run `npm run build` from the root directory (not from client/)
+- The build script automatically navigates to the client directory
+- Expected output: `client/dist/` folder
 
 ### Issue: Socket.io connection errors
 - Clear browser cache (Cmd+Shift+Delete)

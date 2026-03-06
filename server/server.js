@@ -34,6 +34,8 @@ if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
 app.use("/api/room", roomRoutes);
 
+app.get("/health", (req, res) => res.json({ status: "ok", timestamp: Date.now() }));
+
 // Serve static client files
 const clientBuildPath = path.join(__dirname, "../client/dist");
 if (fs.existsSync(clientBuildPath)) {
@@ -43,8 +45,6 @@ if (fs.existsSync(clientBuildPath)) {
     res.sendFile(path.join(clientBuildPath, "index.html"));
   });
 }
-
-app.get("/health", (req, res) => res.json({ status: "ok", timestamp: Date.now() }));
 
 io.on("connection", (socket) => {
   console.log(`Socket connected: ${socket.id}`);
