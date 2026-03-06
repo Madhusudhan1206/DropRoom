@@ -14,7 +14,7 @@ const server = http.createServer(app);
 const ALLOWED_ORIGINS = [
   "http://localhost:5173",
   "http://localhost:3000",
-  process.env.CLIENT_URL, // e.g. https://your-frontend.onrender.com
+  process.env.CLIENT_URL, // e.g. https://droproom.onrender.com
 ].filter(Boolean);
 
 const io = new Server(server, {
@@ -26,7 +26,6 @@ const io = new Server(server, {
 
 app.set("io", io);
 
-<<<<<<< HEAD
 app.use(cors({ origin: ALLOWED_ORIGINS }));
 app.use(express.json());
 
