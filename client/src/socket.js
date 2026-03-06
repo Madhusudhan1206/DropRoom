@@ -1,8 +1,6 @@
 import { io } from 'socket.io-client'
 
-const SOCKET_URL = io('https://droproom-server.onrender.com')
-
-const socket = io(SOCKET_URL, {
+const socket = io('http://localhost:5000', {
   autoConnect: false,
 })
 
