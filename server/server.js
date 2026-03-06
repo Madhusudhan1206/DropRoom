@@ -11,16 +11,23 @@ const roomRoutes = require("./routes/room");
 const app = express();
 const server = http.createServer(app);
 
+const ALLOWED_ORIGINS = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  process.env.CLIENT_URL, // e.g. https://your-frontend.onrender.com
+].filter(Boolean);
+
 const io = new Server(server, {
   cors: {
-    origin: ["https://droproom.onrender.com"],
+    origin: ALLOWED_ORIGINS,
     methods: ["GET", "POST"],
   },
 });
 
 app.set("io", io);
 
-app.use(cors({ origin: ["https://droproom.onrender.com"] }));
+<<<<<<< HEAD
+app.use(cors({ origin: ALLOWED_ORIGINS }));
 app.use(express.json());
 
 const uploadsDir = path.join(__dirname, "uploads");
@@ -45,13 +52,10 @@ io.on("connection", (socket) => {
 
     const userCount = roomManager.getRoomUserCount(code);
 
-    // Tell the joiner their current count
     socket.emit("userJoined", { userCount, socketId: socket.id });
-
-    // Tell EVERYONE ELSE someone new joined
     socket.to(code).emit("userJoined", { userCount, socketId: socket.id });
 
-    // Send existing files to the new joiner so they see files uploaded before they joined
+    // Send existing files to late joiners
     const room = roomManager.getRoom(code);
     if (room && room.files.length > 0) {
       room.files.forEach((file) => {
